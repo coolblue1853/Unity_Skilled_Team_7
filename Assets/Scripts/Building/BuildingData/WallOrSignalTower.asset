@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 981490a8caa04e74abe876d608cb086e, type: 3}
+  m_Name: WallOrSignalTower
+  m_EditorClassIdentifier: 
+  dataList:
+  - ID: 0
+    name: "\uC2E0\uD638\uD0D1"
+    description: "\uC678\uBD80\uC640\uC758 \uD1B5\uC2E0\uC744 \uC704\uD574 \uBC18\uB4DC\uC2DC
+      \uC9C0\uCF1C\uC57C \uD55C\uB2E4."
+    buildingDatas:
+    - Prefeab: {fileID: 0}
+      time: 0
+      hpMax: 1000
+      resources: []
+    - Prefeab: {fileID: 0}
+      time: 30
+      hpMax: 1000
+      resources: []
+    - Prefeab: {fileID: 0}
+      time: 60
+      hpMax: 1000
+      resources: []
+    - Prefeab: {fileID: 0}
+      time: 90
+      hpMax: 1000
+      resources: []
+    - Prefeab: {fileID: 0}
+      time: 120
+      hpMax: 1000
+      resources: []
+  - ID: 1
+    name: "\uBCBD"
+    description: "\uC801 \uC774\uB3D9\uACBD\uB85C \uCC28\uB2E8"
+    buildingDatas:
+    - Prefeab: {fileID: 0}
+      time: 5
+      hpMax: 300
+      resources: []
+    - Prefeab: {fileID: 0}
+      time: 15
+      hpMax: 500
+      resources: []
+    - Prefeab: {fileID: 0}
+      time: 30
+      hpMax: 700
+      resources: []

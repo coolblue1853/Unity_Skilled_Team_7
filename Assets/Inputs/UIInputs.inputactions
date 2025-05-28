@@ -1,0 +1,34 @@
+{
+    "name": "UIInputs",
+    "maps": [
+        {
+            "name": "UIActionMap",
+            "id": "be74896f-5857-4729-bcfd-1391817b8288",
+            "actions": [
+                {
+                    "name": "Minimap",
+                    "type": "Button",
+                    "id": "200fd05d-1259-410f-abf9-b199d2b330f6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "4dc94447-b5f6-43a5-a41b-9ef4ddfec017",
+                    "path": "<Keyboard>/tab",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Minimap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
