@@ -2,24 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering;
 using static UnityEditor.Progress;
 
 public class UI_QuickSlotManager : MonoBehaviour
 {
+    private PlayerEventHandler eventHandler;
+    private PlayerDataSO playerData;
     // 대쉬 이미지는 고정
     [SerializeField] private Sprite dashSprite;
     [SerializeField] private UI_QuickSlot[] itemSlots;
 
     private int dashIndex = 4;
+
     private void Start()
     {
-        SetDashSlot(2.0f); // 추후 변경
+        playerData = InventoryManager.instance.player.PlayerDataSO;
+        eventHandler= InventoryManager.instance.player.PlayerEvents;
+        InventoryManager.instance.quickSlotManager = this;
+        SetDashSlot(playerData.DashCoolDown);
+
+        eventHandler.onDash += OnDash;
     }
 
-    public void SetItemSlot(int index, Sprite sprite, float cooldown)
+    public void SetItemSlot(int index, ItemInfo info, float cooldown = 0)
     {
-        // 아이템 관련 슬롯 설정
+        itemSlots[index].SetSlot(info, cooldown);
     }
+    public void ClearItemSlot(int index)
+    {
+        itemSlots[index].ClearSlot();
+    }
+
     public void SetDashSlot(float cooldown)
     {
         itemSlots[dashIndex].SetSlot(dashSprite, cooldown);
@@ -29,14 +43,19 @@ public class UI_QuickSlotManager : MonoBehaviour
     {
         itemSlots[index].TriggerCooldown();
     }
-
-
-    //테스트
-    private void Update()
+    // 추후 플레이어컨트롤러와 연결해주어야함.
+    public void OnDash()
     {
-        if (Input.GetKeyDown(KeyCode.F))
-        {
-            itemSlots[dashIndex].TriggerCooldown();
-        }
+        itemSlots[dashIndex].TriggerCooldown();
     }
+    public bool CheckQuick(int index, bool isEnd = false)
+    {
+         return itemSlots[index].TriggerCooldown(isEnd);
+    }
+    public void UpdateStack(int index, ItemInfo info)
+    {
+        itemSlots[index].UpdateStack(info);
+    }
+
+
 }

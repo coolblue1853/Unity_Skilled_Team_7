@@ -12,7 +12,7 @@ public class FormManagerEditor : Editor
 
         if (GUILayout.Button("폼 등록"))
         {
-            manager.AutoAssignTables();
+            manager.AutoAssign();
             Debug.Log("폼 등록 성공!!");
         }
     }

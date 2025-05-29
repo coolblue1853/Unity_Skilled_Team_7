@@ -10,5 +10,11 @@ public class UI_Minimap : UI_Scene
     {
         minimapObj.SetActive(!minimapObj.activeSelf);
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Tab))
+        {
+            minimapObj.SetActive(!minimapObj.activeSelf);
+        }
+    }
 }

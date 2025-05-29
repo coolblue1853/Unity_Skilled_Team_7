@@ -15,12 +15,12 @@ MonoBehaviour:
   resourceName: "\uAC74\uC870 \uC2DD\uB7C9\uD329"
   description: "\uACE0\uAE09 \uC2DD\uB7C9"
   type: 1
-  icon: {fileID: 0}
+  icon: {fileID: 21300000, guid: 8c08761b9e651664fbf4deca4ff91a89, type: 3}
   canStack: 1
   maxStackAmount: 999
   consumables:
   - type: 0
     value: 20
   - type: 1
-    value: 50
+    value: 20
   equipPrefab: {fileID: 0}

@@ -55,7 +55,7 @@ public class PlayerStatus : MonoBehaviour
     private float hydrationDecayPerInterval;
     private float HydrationDecayPerInterval => player.OnBattle ? hydrationDecayPerInterval * 5 : hydrationDecayPerInterval;
     private float interval;
-    
+
     // 체력 회복량
     private float healthRecoverPerInterval;
     #endregion
@@ -115,7 +115,9 @@ public class PlayerStatus : MonoBehaviour
         CurHealth -= amount;
 
         if (CurHealth <= 0)
+        {
             player.Dead();
+        }
     }
 
     public bool UseStamina(float amount)
@@ -150,5 +152,22 @@ public class PlayerStatus : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void SetItemStat(ConsumableType type, float value)
+    {
+        switch (type)
+        {
+            case ConsumableType.Health:
+                CurHealth += value;
+                break;
+
+            case ConsumableType.Stamina:
+                CurStamina += value;
+                break;
+            case ConsumableType.Thirst:
+                CurHydration += value;
+                break;
+        }
     }
 }

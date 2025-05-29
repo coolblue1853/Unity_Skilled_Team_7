@@ -7,61 +7,82 @@ public enum BuildingIndex
     Turret,
     SlowTurret,
     Generator,
-    Refinary,
     DroneManageOffice,
+    Refinery,
 }
 
-public class BaseBuilding : MonoBehaviour
+// 건물의 기본형
+public abstract class BaseBuilding : MonoBehaviour, IDamageable
 {
-    [SerializeField] BuildingIndex buildingIndex; // 건물 인덱스
-    int level = 0; // 건물 레벨
-    int levelMax; // 해당 건물 종류의 최대 레벨
-    float hpCurrent; // 현재 체력
-    float hpMax; // 현재 레벨의 최대 체력
+    [SerializeField] protected BuildingIndex buildingIndex;
+    public BuildingIndex GetBuildingIndex() => buildingIndex;
 
-    private void OnEnable()
+    protected InventoryManager inventoryManager;
+
+    protected int level = 0, // 건물 레벨
+                  levelMax; // 해당 건물 종류의 최대 레벨
+    protected float hpCurrent, // 현재 체력
+                    hpMax; // 현재 레벨의 최대 체력
+
+    protected virtual void Start()
     {
+        inventoryManager = FindObjectOfType<InventoryManager>();
         Init();
     }
 
     // 건물 처음 생성 때 초기화가 필요한 것 모음
-    public virtual void Init()
-    {
-        levelMax = FormManager.Instance.GetForm<WallForm>().GetDataByID((int)buildingIndex).buildingDatas.Length - 1;
-        SetBuildingStatus();
-    }
+    protected abstract void Init();
 
     // 레벨업 후 스테이터스 적용
     public virtual void BuildingLvUp()
     {
         if (level < levelMax)
         {
+            // 이전 레벨의 최대 HP
+            float hpMaxBefore = hpMax;
+            // 레벨업
             level++;
+            // 레벨업 스테이터스 반영
             SetBuildingStatus();
+            // 최대 체력 증가 비율에 맞춰 현재 HP 변화
+            hpCurrent *= (hpMax / hpMaxBefore);
         }
     }
 
     // 레벨에 맞는 스테이터스 부여
-    protected virtual void SetBuildingStatus()
-    {
-        // 건물 종류에 맞는 데이터를 가져옴
-        var buildingData = FormManager.Instance.GetForm<WallForm>().GetDataByID((int)buildingIndex);
-        // 해당 레벨에 맞는 데이터
-        var levelData = buildingData.buildingDatas[level];
-        // 최대 체력 증가에 맞춰 풀피로 회복 >> %로 깎인 상태 유지해야 하는지 물어보기
-        hpCurrent = hpMax = levelData.hpMax;
-    }
+    protected abstract void SetBuildingStatus();
 
-    // 머지 이후 건물에 공통적으로 "대미지를 줄 수 있는" 인터페이스 넣기 !!!
     // 대미지를 받아 체력 감소 및 파괴
-
-    public void Damage(float damage)
+    public void TakeDamage(float amount)
     {
-        hpCurrent = Mathf.Clamp(hpCurrent - damage, 0, hpMax);
+        hpCurrent = Mathf.Clamp(hpCurrent - amount, 0, hpMax);
         if (hpCurrent <= 0)
             Destroy(gameObject);
     }
 
     // 수리
     public void Fix(float amount) => hpCurrent = Mathf.Clamp(hpCurrent + amount, 0, hpMax);
+
+    // 최대 레벨인지 여부 반환 (건물 업그레이드 가능 체크에 사용)
+    public bool isMaxLevel() => level.Equals(levelMax);
+
+    // 건물마다 고유로 가지는 값들 반환
+    public virtual BuildingStatus GetIndividualBuildingInfo() => new BuildingStatus(level, levelMax, hpCurrent);
+
+    // 자원 소모(건설, 업그레이드)
+    public abstract void ResourceConsumption(int nextLevel);
+}
+
+public class BuildingStatus
+{
+    public int level, // 건물 레벨
+               levelMax; // 해당 건물 종류의 최대 레벨
+    public float hpCurrent; // 현재 체력
+
+    public BuildingStatus(int level, int levelMax, float hpCurrent)
+    {
+        this.level = level;
+        this.levelMax = levelMax;
+        this.hpCurrent = hpCurrent;
+    }
 }

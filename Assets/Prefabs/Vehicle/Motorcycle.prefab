@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 196572971633983263}
   - component: {fileID: 6741130986408241232}
   - component: {fileID: 6172029506565402318}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Wheel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1736415544724600270}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.4, z: -1}
+  m_LocalPosition: {x: 0, y: 0.4, z: -0.2}
   m_LocalScale: {x: 0.8000001, y: 0.10000001, z: 0.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -94,7 +94,8 @@ GameObject:
   - component: {fileID: 2233758634640455385}
   - component: {fileID: 2606157614418284063}
   - component: {fileID: 3870793296749771759}
-  m_Layer: 0
+  - component: {fileID: 332774318382415228}
+  m_Layer: 12
   m_Name: Motorcycle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -109,7 +110,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1995820833248459514}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -137,7 +138,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.5, y: 1, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &3870793296749771759
 MonoBehaviour:
@@ -153,6 +154,33 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   vehicleDataSO: {fileID: 11400000, guid: bcd12a1b689ecae45ab1bccb1fdaa027, type: 2}
   mountPos: {fileID: 12207499740471823}
+--- !u!54 &332774318382415228
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1995820833248459514}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1 &2144451727369673723
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +192,7 @@ GameObject:
   - component: {fileID: 1855455864838132640}
   - component: {fileID: 4731001303162205970}
   - component: {fileID: 7784468477397039205}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Wheel (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -247,7 +275,7 @@ GameObject:
   - component: {fileID: 8105600610210080287}
   - component: {fileID: 1514091152977968811}
   - component: {fileID: 2719552568410649104}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +291,7 @@ Transform:
   m_GameObject: {fileID: 4268574600716902675}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.128, z: 0.666}
+  m_LocalPosition: {x: 0, y: 1.199, z: 0.616}
   m_LocalScale: {x: 0.6, y: 0.1, z: 0.1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -330,7 +358,7 @@ GameObject:
   - component: {fileID: 755064922617894028}
   - component: {fileID: 3643773485314203920}
   - component: {fileID: 3799741761844415535}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -346,8 +374,8 @@ Transform:
   m_GameObject: {fileID: 4534099862572467642}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.73, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 2}
+  m_LocalPosition: {x: 0, y: 0.73, z: 0.307}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3581216130992289794}
@@ -411,7 +439,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3581216130992289794}
-  m_Layer: 0
+  - component: {fileID: 2670896008808010762}
+  m_Layer: 12
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -438,6 +467,27 @@ Transform:
   - {fileID: 8105600610210080287}
   m_Father: {fileID: 2233758634640455385}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &2670896008808010762
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5230452321984448407}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.5, z: 1.4}
+  m_Center: {x: 0, y: 0.5, z: 0.4}
 --- !u!1 &7351120202344893205
 GameObject:
   m_ObjectHideFlags: 0
@@ -449,7 +499,7 @@ GameObject:
   - component: {fileID: 1929141191445108316}
   - component: {fileID: 580630536222985682}
   - component: {fileID: 5647335188083927247}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +516,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.25786516, y: -0, z: -0, w: 0.9661809}
   m_LocalPosition: {x: 0, y: 0.985, z: 0.732}
-  m_LocalScale: {x: 0.1, y: 0.5, z: 0.19999999}
+  m_LocalScale: {x: 0.1, y: 0.7, z: 0.19999999}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3581216130992289794}
@@ -530,7 +580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 12207499740471823}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: MountPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -546,7 +596,7 @@ Transform:
   m_GameObject: {fileID: 8691394618585531781}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 0}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

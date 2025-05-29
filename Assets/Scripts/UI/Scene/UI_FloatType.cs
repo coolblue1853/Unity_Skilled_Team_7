@@ -6,16 +6,11 @@ using static UI_StatBar;
 public class UI_FloatType : UI_Scene
 {
     private TextMeshProUGUI countTxt;
+    InventoryManager inventoryManager;
 
-    public enum Type
-    {
-        Scrap,
-        Circuit,
-        Fuel,
-        Wave,
-    }
 
-    [SerializeField] private Type type;
+
+    [SerializeField] private FloatType type;
 
     enum TMP
     {
@@ -26,39 +21,41 @@ public class UI_FloatType : UI_Scene
     {
         base.Init();
         Bind<TextMeshProUGUI>(typeof(TMP));
-
-
+        inventoryManager = InventoryManager.instance;
+        countTxt = Get<TextMeshProUGUI>((int)TMP.CountTxt);
         switch (type)
         {
-            case Type.Scrap:
-               // _PC.OnHealthChanged += UpdateCurrent;
-               // UpdateCurrent(_PC._maxHealth, _PC.Health);
+            case FloatType.Item_ScrapIron:
+                inventoryManager.OnScrapChanged += UpdateCurrent;
                 break;
-            case Type.Circuit:
-               // _PC.OnStaminaChanged += UpdateCurrent;
-               // UpdateCurrent(_PC._maxStamina, _PC.Stamina);
+            case FloatType.Item_Circuit:
+                inventoryManager.OnCircuitChanged += UpdateCurrent;
                 break;
-            case Type.Fuel:
+            case FloatType.Item_Fuel:
+                inventoryManager.OnFuelChanged += UpdateCurrent;
+                break;
+        //    case Type.Wave:
                 //_PC.OnStaminaChanged += UpdateCurrent;
-                //UpdateCurrent(_PC._maxStamina, _PC.Stamina);
-                break;
-            case Type.Wave:
-                //_PC.OnStaminaChanged += UpdateCurrent;
-                //UpdateCurrent(_PC._maxStamina, _PC.Stamina);
-                break;
+             //   break;
         }
     }
     private void OnDisable()
     {
         switch (type)
         {
-            case Type.Scrap:
-               // _PC.OnStaminaChanged -= UpdateCurrent;
+            case FloatType.Item_ScrapIron:
+                inventoryManager.OnScrapChanged -= UpdateCurrent;
+                break;
+            case FloatType.Item_Circuit:
+                inventoryManager.OnCircuitChanged -= UpdateCurrent;
+                break;
+            case FloatType.Item_Fuel:
+                inventoryManager.OnFuelChanged -= UpdateCurrent;
                 break;
         }
     }
 
-    void UpdateCurrent(float stack)
+    void UpdateCurrent(int stack)
     {
         countTxt.text = stack.ToString();
     }

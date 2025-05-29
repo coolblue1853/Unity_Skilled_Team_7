@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Turret", menuName = "BuildingData/Turret")]
-public class TurretForm : BaseBuildingForm<BuildingData<TurretData>>
+public class TurretForm : BaseBuildingForm<TurretData>
 {
     public override void CreateForm()
     {
@@ -12,11 +12,17 @@ public class TurretForm : BaseBuildingForm<BuildingData<TurretData>>
             DataDic[(int)data.ID] = data;
         }
     }
-}
 
-// 벽을 상속, 공격 요소를 추가한 터렛
+    // !!! 적 작업 내용 머지 이후 진행하기
+}
 [Serializable]
-public class TurretData : BasicBuildingData
+public class TurretData : CommonBuildingData
+{
+    public TurretDataByLevel[] dataByLevel;
+}
+// 터렛의 레벨 별 데이터
+[Serializable]
+public class TurretDataByLevel : BasicBuildingDataByLevel
 {
     [Header("자동 포탑 정보")]
     // 타워에 필요한 요소인 공격력, 공격 딜레이, 사거리 추가

@@ -20,11 +20,10 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        if (player.IsDead) return;
+
         if (context.phase == InputActionPhase.Performed)
         {
-            if (player.CurState != PlayerState.Walk)
-                player.ChangeState(PlayerState.Walk);
-
             Vector2 moveInput = context.ReadValue<Vector2>();
 
             moveDirection = Vector3.right * moveInput.x + Vector3.forward * moveInput.y;
@@ -34,21 +33,23 @@ public class PlayerController : MonoBehaviour
         else if (context.phase == InputActionPhase.Canceled)
         {
             moveDirection = Vector3.zero;
-            player.ChangeState(PlayerState.Idle);
         }
     }
 
     public void OnDash(InputAction.CallbackContext context)
     {
+        if (player.IsDead) return;
+
         if (context.phase == InputActionPhase.Started)
         {
-            // Dash 기능
             player.Dash();
         }
     }
 
     public void OnLook(InputAction.CallbackContext context)
     {
+        if (player.IsDead) return;
+
         Vector2 mouseScreenPos = context.ReadValue<Vector2>();
 
         Ray ray = cam.ScreenPointToRay(mouseScreenPos);
@@ -73,11 +74,15 @@ public class PlayerController : MonoBehaviour
 
     public void OnInteract(InputAction.CallbackContext context)
     {
+        if (player.IsDead) return;
+
         if (context.phase == InputActionPhase.Started)
         {
-            if (player.OnVehicle)
+            // 현재 탈 것 탑승중이면 해제
+            if (player.CurState == PlayerState.Vehicle)
             {
                 player.SetVehicle(null);
+                player.ChangeState(PlayerState.Idle);
                 return;
             }
 
@@ -89,12 +94,29 @@ public class PlayerController : MonoBehaviour
                 {
                     player.SetVehicle(vehicle);
                 }
+
+                else if (hit.collider.TryGetComponent(out Resource resource))
+                {
+                    player.GatheringResource(resource);
+                }
             }
+        }
+    }
+
+    public void OnCallVehicle(InputAction.CallbackContext context)
+    {
+        if (player.IsDead) return;
+
+        if (context.phase == InputActionPhase.Started)
+        {
+            player.CallVehicle();
         }
     }
 
     public void OnCommand(InputAction.CallbackContext context)
     {
+        if (player.IsDead) return;
+
         if (context.phase == InputActionPhase.Started)
         {
 
@@ -103,6 +125,8 @@ public class PlayerController : MonoBehaviour
 
     public void OnSelectSlot(InputAction.CallbackContext context)
     {
+        if (player.IsDead) return;
+
         if (context.phase != InputActionPhase.Started) return;
 
         string keyString = context.control.name;
@@ -113,6 +137,52 @@ public class PlayerController : MonoBehaviour
 
             // 선택한 슬롯 인덱스 이벤트 호출
             player.PlayerEvents.RaisedSeletSlot(slotIdx);
+        }
+    }
+
+    public void OnSelectWeapon(InputAction.CallbackContext context)
+    {
+        if (player.IsDead) return;
+
+        if (context.phase != InputActionPhase.Started) return;
+
+        string keyString = context.control.name;
+
+        if (int.TryParse(keyString, out int keyNum))
+        {
+            int weaponIdx = keyNum == 5 ? 0 : 1;
+
+            player.SelectWeapon(weaponIdx);
+        }
+    }
+
+    public void OnThrow(InputAction.CallbackContext context)
+    {
+        if (player.IsDead) return;
+
+        if (context.phase == InputActionPhase.Started)
+        {
+            player.ThrowGrenade();
+        }
+    }
+
+    public void OnStartAiming(InputAction.CallbackContext context)
+    {
+        if (player.IsDead || player.CurState == PlayerState.Gathering) return;
+
+        if (context.phase == InputActionPhase.Started)
+        {
+            player.StartAiming();
+        }
+    }
+
+    public void OnStopAiming(InputAction.CallbackContext context)
+    {
+        if (player.IsDead) return;
+
+        if (context.phase == InputActionPhase.Started)
+        {
+            player.StopAiming();
         }
     }
 }

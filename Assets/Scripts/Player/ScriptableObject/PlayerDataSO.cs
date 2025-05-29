@@ -24,4 +24,8 @@ public class PlayerDataSO : ScriptableObject
     public float DashCoolDown { get => dashCoolDown; }
     public float DashStamina { get => dashStamina; }
     public float DashHydration { get => dashHydration; }
+
+    [Header("Gathering")]
+    [SerializeField] float gatherStamina;
+    public float GatherStamina { get => gatherStamina; }
 }

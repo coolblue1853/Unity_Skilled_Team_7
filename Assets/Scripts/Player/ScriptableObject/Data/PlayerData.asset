@@ -16,8 +16,9 @@ MonoBehaviour:
   maxStamina: 100
   maxHydration: 100
   moveSpeed: 3
-  dashSpeed: 15
-  dashDuration: 0.2
+  dashSpeed: 7
+  dashDuration: 0.8
   dashCoolDown: 3
   dashStamina: 15
   dashHydration: 10
+  gatherStamina: 10

@@ -1,9 +1,8 @@
 using System;
 using UnityEngine;
-using UnityEngine.Events;
 
 [CreateAssetMenu(fileName = "ProductionBuilding", menuName = "BuildingData/Production")]
-public class ProductionBuildingForm : BaseBuildingForm<BuildingData<ProductionBuildingData>>
+public class ProductionBuildingForm : BaseBuildingForm<ProductionBuildingData>
 {
     public override void CreateForm()
     {
@@ -15,10 +14,24 @@ public class ProductionBuildingForm : BaseBuildingForm<BuildingData<ProductionBu
     }
 }
 
-// 벽을 상속. 생산하는 특수 기능 추가
+
 [Serializable]
-public class ProductionBuildingData : BasicBuildingData
+public class ProductionBuildingData : CommonBuildingData
+{
+    public ProductionBuildingDataByLevel[] dataByLevel;
+}
+
+// 레벨 별 생산 정보
+[Serializable]
+public class ProductionBuildingDataByLevel : BasicBuildingDataByLevel
 {
     [Header("생산 기능 정보")]
-    public UnityEvent Production; // 생산 기능
+    [Tooltip("생산품")]
+    public ItemData product;
+    [Tooltip("생산 시간")]
+    public float productionTime;
+    [Tooltip("한번에 생산하는 양")]
+    public int amount;
+    [Tooltip("생산 적재 한계치")]
+    public int capacity;
 }

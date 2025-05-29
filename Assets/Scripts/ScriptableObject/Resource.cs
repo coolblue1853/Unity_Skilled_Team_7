@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -24,11 +25,11 @@ public class Resource : MonoBehaviour
     void Awake()
     {
         parentObject = transform.parent.gameObject;
-        inventory = GameObject.Find("Inventory").GetComponent<InventoryManager>();
+        inventory = GameObject.Find("Inventory_").GetComponent<InventoryManager>();
         spawn = GameObject.Find("SpawnManager").GetComponent<SpawnManager>();
     }
 
-    public IEnumerator GetResource()
+    public IEnumerator GetResource(Action onCompleted)
     {
         // 소모 자원 있다면 자원 있는지 확인 하는 소스 작성
         if (deductItem.Length > 0)
@@ -45,18 +46,20 @@ public class Resource : MonoBehaviour
         }
         else deduct = false;
 
-        int getCount = Random.Range(minCount, maxCount);
+        int getCount = UnityEngine.Random.Range(minCount, maxCount);
         yield return new WaitForSeconds(farmingRate);
 
         if (deduct) inventory.DeductItem(deductItem, dedcuctCount);
         inventory.AddItem(item, getCount);
         spawn.SpawnResource(parentObject, spawnRate);
         parentObject.SetActive(false);
+
+        onCompleted?.Invoke();
     }
 
     IEnumerator DigResource() //  AI 자원 채굴
     {
-        int getCount = Random.Range(minCount, maxCount);
+        int getCount = UnityEngine.Random.Range(minCount, maxCount);
         yield return new WaitForSeconds(farmingRate);
         Debug.Log(item.resourceName + " 를 " + getCount + "개 획득");
         parentObject.SetActive(false);

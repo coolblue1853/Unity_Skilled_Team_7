@@ -104,6 +104,7 @@ public class UIManager : MonoBehaviour
     //확정적으로 원하는녀석 삭제하는지 체크
     public void ClosePopupUI(UI_Popup popup)
     {
+        Time.timeScale = 1f;
         if (_popupStack.Count == 0) return;
         if (_popupStack.Peek() != popup)
         {
@@ -115,6 +116,7 @@ public class UIManager : MonoBehaviour
     // 오버라이딩
     public void ClosePopupUI()
     {
+        Time.timeScale = 1f;
         if (_popupStack.Count == 0) return;
 
         UI_Popup popup = _popupStack.Pop();
@@ -122,8 +124,5 @@ public class UIManager : MonoBehaviour
         popup = null;
 
         _order--;
-
     }
-
-
 }

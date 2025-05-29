@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 public class UI_StatBar : UI_Scene
 {
+    private PlayerEventHandler eventHandler;
     
     public enum StatBarType
     {
@@ -19,26 +20,25 @@ public class UI_StatBar : UI_Scene
         FillBar
     }
 
-    private T_PC _PC;
 
     public override void Init()
     {
         base.Init();
-        _PC = T_PC.instance; // 추후 연결 변경
+        eventHandler = InventoryManager.instance.player.PlayerEvents;
         Bind<Image>(typeof(Images));
 
         switch (statBarType)
         {
             case StatBarType.Health:
-                _PC.OnHealthChanged += UpdateCurrent;
-                UpdateCurrent(_PC._maxHealth, _PC.Health);
+                eventHandler.onChangeHealth += UpdateCurrent;
+               // UpdateCurrent(_PC._maxHealth, _PC.Health);
                 break;
             case StatBarType.Stamina:
-                _PC.OnStaminaChanged += UpdateCurrent;
-                UpdateCurrent(_PC._maxStamina, _PC.Stamina);
+                eventHandler.onChangeStamina += UpdateCurrent;
+                // UpdateCurrent(_PC._maxStamina, _PC.Stamina);
                 break;
             case StatBarType.Thirst:
-                //_PC.OnStaminaChanged += UpdateCurrent;
+                eventHandler.onChangeHydration += UpdateCurrent;
                 //UpdateCurrent(_PC._maxStamina, _PC.Stamina);
                 break;
         }
@@ -49,7 +49,7 @@ public class UI_StatBar : UI_Scene
         switch (statBarType)
         {
             case StatBarType.Health:
-                _PC.OnStaminaChanged -= UpdateCurrent;
+              //  _PC.OnStaminaChanged -= UpdateCurrent;
                 break;
         }
     }
