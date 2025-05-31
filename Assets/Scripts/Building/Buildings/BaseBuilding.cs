@@ -28,6 +28,8 @@ public abstract class BaseBuilding : MonoBehaviour, IDamageable
                     requireTime = 0; // 건설/업그레이드 필요 시간
     Coroutine construct; // 진행 중인 건설 코루틴
 
+    public Material mat;
+
     public bool NeedsRepair => hpCurrent < hpMax;
 
     protected virtual void Start()
@@ -114,6 +116,7 @@ public abstract class BaseBuilding : MonoBehaviour, IDamageable
         {
             yield return new WaitForFixedUpdate();
             progressTime += Time.fixedDeltaTime;
+            mat?.SetFloat("BuildingProgress", progressTime);
         }
         // 작업 완료
         EndConstruct();

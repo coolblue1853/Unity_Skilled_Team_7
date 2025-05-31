@@ -64,7 +64,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 122fa6eb03ce86a4aab14ffb7ef74000, type: 2}
+  - {fileID: 2100000, guid: 5547f357fb736de42a09bf7e94760d6b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -121,6 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buildingIndex: 6
+  mat: {fileID: 0}
   water: {fileID: 11400000, guid: 0774419f80bde2f4682359c12bd37f19, type: 2}
   progressProduction: 0
   requireProduction: 0
